@@ -160,7 +160,7 @@ int server(uint16_t port)
 			// receive message from client
 			rcv_len = recv(sockfd_ac, (void*) rcv_buf, (size_t) MAX_MSG_LENGTH, 0);
 
-			if(rcv_len == 0) { // client has closed the connection
+			if(rcv_len <= 0) { // client has closed the connection
 				break;
 			} else if (rcv_len == -1) { // receive error
 				perror("Receive error:");

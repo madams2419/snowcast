@@ -188,7 +188,7 @@ void *handleConnection(void *sockfd_ptr) {
 		// receive message from client
 		rcv_len = recv(sockfd, (void*) rcv_buf, (size_t) MAX_MSG_LENGTH, 0);
 
-		if (rcv_len == 0) { // client has closed the connection
+		if (rcv_len <= 0) { // client has closed the connection
 			break;
 		} else if (rcv_len == -1) { // receive error
 			perror("Receive error:");
