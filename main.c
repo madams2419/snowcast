@@ -144,7 +144,10 @@ int server(uint16_t port)
 	// loop for client connections
 	while(1) {
 		// accept client connection
-		sockfd_ac = accept(sockfd_ls, (struct sockaddr*) client_addr, &client_addr_size);
+		if ((sockfd_ac = accept(sockfd_ls, (struct sockaddr*) client_addr, &client_addr_size)) == -1) {
+			perror("Accept error:");
+			return 1;
+		}
 
 		// loop for client messages
 		while(1) {
@@ -161,10 +164,8 @@ int server(uint16_t port)
 			rcv_len = recv(sockfd_ac, (void*) rcv_buf, (size_t) MAX_MSG_LENGTH, 0);
 
 			if(rcv_len <= 0) { // client has closed the connection
-				break;
-			} else if (rcv_len == -1) { // receive error
 				perror("Receive error:");
-				continue;
+				break;
 			}
 
 			// build response message
