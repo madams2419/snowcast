@@ -1,0 +1,25 @@
+============================
+TESTING
+============================
+
+Both the single threaded implementation (main.c) and the multithreaded (main_threading.c) have been tested
+extensively on Ubuntu 14.04. All tests were done manually. Both servers were tested with multiple strings of
+length less than 512 bytes, equal to 511 bytes, equal to 512 bytes, equal to 513 bytes, and equal to values
+much larger than 512. The multithreaded implementation was tested with with the same strings as the single-
+threaded tests with multiple terminal windows. Tests were also performed using various ports and various IP
+addresses.
+
+============================
+EXTRA CREDIT
+============================
+
+The server is implemented with multithreading to support multiple client connections at once in main_threading.c.
+This implementation uses pthreads, so the file must be compiled with the following command:
+
+gcc -pthread main_threading.c
+
+============================
+RESOURCES USED
+============================
+- Beej's Guide to Network Programming (http://beej.us/guide/bgnet/output/html/multipage/index.html)
+- Linux Manual Pages
