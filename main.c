@@ -90,11 +90,10 @@ int server(uint16_t port)
 	int sockfd_ls; // listen socket descriptor
 	int sockfd_ac; // accept socket descriptor
 	char port_as_str[2]; // connection port as a string
-	struct sockaddr_in sin; // socket address
 	struct addrinfo ai_hints; // hints address info
 	struct addrinfo *ai_list; // linked list of address info structs returned by get address info
 	struct addrinfo *ai; // valid address info
-	struct sockaddr_storage *client_addr; // client address
+	struct sockaddr *client_addr; // client address
 	socklen_t client_addr_size = sizeof(client_addr); // size of client address
 
 	// convert int port to str
@@ -144,7 +143,7 @@ int server(uint16_t port)
 	// loop for client connections
 	while(1) {
 		// accept client connection
-		if ((sockfd_ac = accept(sockfd_ls, (struct sockaddr*) client_addr, &client_addr_size)) == -1) {
+		if ((sockfd_ac = accept(sockfd_ls, client_addr, &client_addr_size)) == -1) {
 			perror("Accept error:");
 			return 1;
 		}
